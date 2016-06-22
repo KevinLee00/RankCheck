@@ -19,13 +19,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void testToast(View view) {
-        Toast.makeText(getApplicationContext(), CurrentGameData.playersNames.toString(), Toast.LENGTH_SHORT).show();
         TextView tv = (TextView) findViewById(R.id.textView);
         EditText et = (EditText) findViewById(R.id.summoner_name);
-        String name = et.getText().toString().replaceAll("//s","");
+        String name = et.getText().toString().replaceAll("\\s+","");
         UserData.setSummonerName(name);
+
         BackgroundTasks bt = new BackgroundTasks(MainActivity.this);
         bt.execute();
-        tv.setText(CurrentGameData.playersNames.toString());
+
+        String players = CurrentGameData.playersNames.toString().replaceAll(",", "\n");
+        tv.setText(players);
+        Toast.makeText(getApplicationContext(), players, Toast.LENGTH_SHORT).show();
     }
 }
