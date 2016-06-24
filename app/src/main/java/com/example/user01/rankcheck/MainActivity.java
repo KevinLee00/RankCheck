@@ -27,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
         BackgroundTasks bt = new BackgroundTasks(MainActivity.this);
         bt.execute();
 
-        String players = CurrentGameData.playersNames.toString().replaceAll(",", "\n");
-        tv.setText(players);
-        Toast.makeText(getApplicationContext(), players, Toast.LENGTH_SHORT).show();
+//        String players = CurrentGameData.playersNames.toString().replaceAll(",", "\n");
+//        tv.setText(players);
+//        Toast.makeText(getApplicationContext(), players, Toast.LENGTH_SHORT).show();
     }
 }
