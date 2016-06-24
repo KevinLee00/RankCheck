@@ -1,5 +1,6 @@
 package com.example.user01.rankcheck;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -30,6 +31,18 @@ public class JSON {
             BufferedReader reader = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
             String jsonText = readAll(reader);
             JSONObject json = new JSONObject(jsonText);
+            return json;
+        }  finally {
+            is.close();
+        }
+    }
+
+    public static JSONArray readJsonArrayFromUrl(String url) throws IOException, JSONException {
+        InputStream is = new URL(url).openStream();
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+            String jsonText = readAll(reader);
+            JSONArray json = new JSONArray(jsonText);
             return json;
         }  finally {
             is.close();

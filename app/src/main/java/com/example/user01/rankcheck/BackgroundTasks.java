@@ -67,29 +67,53 @@ public class BackgroundTasks extends AsyncTask<Void, Void, Void> {
                             + "/entry?api_key="
                             + API_KEY.key);
 
+            // Begin to build Image URLs
+            for (int i=0; i<10; i++) {
+                // Get current patch
+                JSONArray urlArray = JSON.readJsonArrayFromUrl(
+                        "https://global.api.pvp.net/api/lol/static-data/na/v1.2/versions?api_key="
+                                + API_KEY.key);
+                String currPatch = urlArray.getString(0);
+
+                // Get champion key
+                JSONObject championInfo = JSON.readJsonFromUrl(
+                        "https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion/"
+                                + CurrentGameData.championIds.get(i)
+                                + "?api_key="
+                                + API_KEY.key);
+                String championKey = championInfo.getString("key");
+
+                String imageURL = "http://ddragon.leagueoflegends.com/cdn/"
+                        + currPatch
+                        + "/img/champion/"
+                        + championKey
+                        + ".png";
+
+                CurrentGameData.championImageUrls.add(imageURL);
+            }
+
+            // Get player ranks
             for (int i=0; i<10; i++) {
                 if (myJsonObject.has("status")) {
                     CurrentGameData.playerTier.add("UNRANKED");
                     CurrentGameData.playerDivision.add("UNRANKED");
                     Log.i("Info", "Unranked Added");
                 }
+                else {
+                    playerId = CurrentGameData.playerIds.get(i);
+                    JSONArray player = myJsonObject.getJSONArray(playerId);
+                    JSONObject tempJsonObject = player.getJSONObject(0);
+                    tier = tempJsonObject.getString("tier");
 
-                playerId = CurrentGameData.playerIds.get(i);
-                JSONArray player = myJsonObject.getJSONArray(playerId);
-                JSONObject tempJsonObject = player.getJSONObject(0);
-                tier = tempJsonObject.getString("tier" );
+                    JSONArray entries = tempJsonObject.getJSONArray("entries");
+                    tempJsonObject = entries.getJSONObject(0);
+                    division = tempJsonObject.getString("division");
 
-                JSONArray entries = tempJsonObject.getJSONArray("entries");
-                tempJsonObject = entries.getJSONObject(0);
-                division = tempJsonObject.getString("division" );
-
-                CurrentGameData.playerTier.add(tier);
-                CurrentGameData.playerDivision.add(division);
-                Log.i("InfO:", "Rank Added" );
+                    CurrentGameData.playerTier.add(tier);
+                    CurrentGameData.playerDivision.add(division);
+                    Log.i("InfO:", "Rank Added");
+                }
             }
-
-
-
         } catch (IOException e) {
             e.printStackTrace();
             Log.i("Error:", "IOException Thrown");
@@ -97,11 +121,9 @@ public class BackgroundTasks extends AsyncTask<Void, Void, Void> {
             e.printStackTrace();
             Log.i("Error:", "JSONException Thrown");
         }
-
-
-
         return null;
     }
+
 
     @Override
     protected void onPostExecute(Void aVoid) {

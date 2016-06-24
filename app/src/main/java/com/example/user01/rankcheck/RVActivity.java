@@ -21,7 +21,7 @@ public class RVActivity extends Activity {
         LinearLayoutManager playerLayout = new LinearLayoutManager(this);
         playerRV.setLayoutManager(playerLayout);
 
-        RVAdapter playerAdapter = new RVAdapter();
+        RVAdapter playerAdapter = new RVAdapter(this);
         playerRV.setAdapter(playerAdapter);
     }
 }

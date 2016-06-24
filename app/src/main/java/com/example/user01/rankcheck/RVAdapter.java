@@ -1,5 +1,6 @@
 package com.example.user01.rankcheck;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.media.Image;
 import android.support.v7.widget.CardView;
@@ -10,25 +11,36 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 /**
  * Created by user01 on 6/23/2016.
  */
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.EventViewHolder> {
+    Context context;
+    RVAdapter(Context context) { this.context = context; }
 
     public static class EventViewHolder extends RecyclerView.ViewHolder {
+        Context context;
         ImageView championImage;
         ImageView summonerSpell1;
         ImageView summonerSpell2;
         TextView playerName;
         TextView playerRank;
 
-        EventViewHolder(View itemView) {
+        EventViewHolder(View itemView, Context context) {
             super(itemView);
-//            championImage = (ImageView)itemView.findViewById(R.id.champion_image);
-//            summonerSpell1 = (ImageView)itemView.findViewById(R.id.ss1);
-//            summonerSpell2 = (ImageView)itemView.findViewById(R.id.ss2);
+            this.context = context;
+            championImage = (ImageView)itemView.findViewById(R.id.champion_image);
+            summonerSpell1 = (ImageView)itemView.findViewById(R.id.ss1);
+            summonerSpell2 = (ImageView)itemView.findViewById(R.id.ss2);
             playerName = (TextView)itemView.findViewById(R.id.player_name);
             playerRank = (TextView)itemView.findViewById(R.id.player_rank);
+        }
+
+        public void loadImage(int i) {
+
+            Picasso.with(context).load(CurrentGameData.championImageUrls.get(i)).into(championImage);
         }
     }
 
@@ -40,7 +52,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.EventViewHolder> {
     @Override
     public EventViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.player_card, viewGroup, false);
-        return (new EventViewHolder(v));
+        return (new EventViewHolder(v,context));
     }
 
     @Override
@@ -50,6 +62,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.EventViewHolder> {
                 + " "
                 + CurrentGameData.playerDivision.get(i);
         eventViewHolder.playerRank.setText(playerRank);
+        eventViewHolder.loadImage(i);
     }
 
     @Override
