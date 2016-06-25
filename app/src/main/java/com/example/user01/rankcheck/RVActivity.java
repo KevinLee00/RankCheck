@@ -2,26 +2,38 @@ package com.example.user01.rankcheck;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 /**
  * Created by user01 on 6/23/2016.
  */
 public class RVActivity extends Activity {
-    private RecyclerView playerRV;
+    private RecyclerView bluesideRV;
+    private RecyclerView redsideRV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.player_rv);
 
-        playerRV = (RecyclerView) findViewById(R.id.player_rv);
+        bluesideRV = (RecyclerView) findViewById(R.id.blueside_rv);
+        redsideRV = (RecyclerView) findViewById(R.id.redside_rv);
+        CustomLayoutManager bluesideLayout = new CustomLayoutManager(this);
+        bluesideRV.setLayoutManager(bluesideLayout);
+        CustomLayoutManager redsideLayout = new CustomLayoutManager(this);
+        redsideRV.setLayoutManager(redsideLayout);
 
-        LinearLayoutManager playerLayout = new LinearLayoutManager(this);
-        playerRV.setLayoutManager(playerLayout);
+        bluesideRV.setNestedScrollingEnabled(false);
+        bluesideRV.setHasFixedSize(false);
+        redsideRV.setNestedScrollingEnabled(false);
+        redsideRV.setHasFixedSize(false);
 
-        RVAdapter playerAdapter = new RVAdapter(this);
-        playerRV.setAdapter(playerAdapter);
+        BlueSideRVAdapter bluesideAdapter = new BlueSideRVAdapter(this);
+        bluesideRV.setAdapter(bluesideAdapter);
+        RedSideRVAdapter redsideAdapter = new RedSideRVAdapter(this);
+        redsideRV.setAdapter(redsideAdapter);
+
+        Toast.makeText(this, CurrentGameData.playerTier.toString(), Toast.LENGTH_SHORT).show();
     }
 }
