@@ -25,7 +25,9 @@ public class CurrentGameData {
         championIds.clear();
         championImageUrls.clear();
         summonerSpell1.clear();
+        summonerSpell1Urls.clear();
         summonerSpell2.clear();
+        summonerSpell2Urls.clear();
         playerDivision.clear();
         playerTier.clear();
     }
