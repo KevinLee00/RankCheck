@@ -2,9 +2,6 @@ package com.example.user01.rankcheck;
 
 import java.util.ArrayList;
 
-/**
- * Created by user01 on 6/21/2016.
- */
 public class CurrentGameData {
     public static ArrayList<String> playersNames = new ArrayList<>();
     public static ArrayList<String> playerIds = new ArrayList<>();

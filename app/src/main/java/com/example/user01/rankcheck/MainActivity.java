@@ -14,8 +14,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        BackgroundTasks bt = new BackgroundTasks(MainActivity.this);
-//        bt.execute();
     }
 
     public void testToast(View view) {
@@ -27,8 +25,5 @@ public class MainActivity extends AppCompatActivity {
         BackgroundTasks bt = new BackgroundTasks(MainActivity.this);
         bt.execute();
 
-//        String players = CurrentGameData.playersNames.toString().replaceAll(",", "\n");
-//        tv.setText(players);
-//        Toast.makeText(getApplicationContext(), players, Toast.LENGTH_SHORT).show();
     }
 }

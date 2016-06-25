@@ -1,12 +1,9 @@
 package com.example.user01.rankcheck;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,9 +37,9 @@ public class BackgroundTasks extends AsyncTask<Void, Void, Void> {
             JSONArray participantsArray = myJsonObject.getJSONArray("participants");
 
             Log.i("Info: ", "Begin Loop");
-            String playerId = "";
-            String tier = "";
-            String division = "";
+            String playerId;
+            String tier;
+            String division;
             for (int i=0; i<10; i++) {
                 myJsonObject = participantsArray.getJSONObject(i);
                 playerId = myJsonObject.getString("summonerId");

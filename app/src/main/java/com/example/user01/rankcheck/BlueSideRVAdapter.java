@@ -7,18 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 
-/**
- * Created by user01 on 6/23/2016.
- */
 public class BlueSideRVAdapter extends RecyclerView.Adapter<BlueSideRVAdapter.EventViewHolder> {
     Context context;
-    ArrayList<String> players;
 
     BlueSideRVAdapter(Context context) {
         this.context = context;
