@@ -13,9 +13,6 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 
-/**
- * Created by user01 on 6/18/2016.
- */
 public class BackgroundTasks extends AsyncTask<Void, Void, Void> {
     Activity currentActivity;
 
