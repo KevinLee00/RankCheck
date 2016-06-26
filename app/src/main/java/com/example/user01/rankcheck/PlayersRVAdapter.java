@@ -8,13 +8,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.squareup.picasso.Picasso;
+import java.util.ArrayList;
 
 
-public class RedSideRVAdapter extends RecyclerView.Adapter<RedSideRVAdapter.EventViewHolder> {
+public class PlayersRVAdapter extends RecyclerView.Adapter<PlayersRVAdapter.EventViewHolder> {
     Context context;
+    ArrayList<Player> players = new ArrayList<>();
 
-    RedSideRVAdapter(Context context) {
+    public PlayersRVAdapter(Context context, ArrayList<Player> playersList) {
         this.context = context;
+        this.players = playersList;
     }
 
     public static class EventViewHolder extends RecyclerView.ViewHolder {
@@ -41,25 +44,6 @@ public class RedSideRVAdapter extends RecyclerView.Adapter<RedSideRVAdapter.Even
             Picasso.with(context).load(CurrentGameData.championImageUrls.get(i)).into(championImage);
             Picasso.with(context).load(CurrentGameData.summonerSpell1Urls.get(i)).into(summonerSpell1);
             Picasso.with(context).load(CurrentGameData.summonerSpell2Urls.get(i)).into(summonerSpell2);
-
-            String rank = CurrentGameData.playerTier.get(i);
-
-            if (rank.equals("BRONZE"))
-                Picasso.with(context).load(R.drawable.bronze).into(rankEmblem);
-            else if (rank.equals("SILVER"))
-                Picasso.with(context).load(R.drawable.silver).into(rankEmblem);
-            else if (rank.equals("GOLD"))
-                Picasso.with(context).load(R.drawable.gold).into(rankEmblem);
-            else if (rank.equals("PLATINUM"))
-                Picasso.with(context).load(R.drawable.plat).into(rankEmblem);
-            else if (rank.equals("DIAMOND"))
-                Picasso.with(context).load(R.drawable.diamond).into(rankEmblem);
-            else if (rank.equals("MASTER"))
-                Picasso.with(context).load(R.drawable.master).into(rankEmblem);
-            else if (rank.equals("CHALLENGER"))
-                Picasso.with(context).load(R.drawable.challenger).into(rankEmblem);
-            else
-                Picasso.with(context).load(R.drawable.unranked).into(rankEmblem);
         }
     }
 
@@ -76,16 +60,34 @@ public class RedSideRVAdapter extends RecyclerView.Adapter<RedSideRVAdapter.Even
 
     @Override
     public void onBindViewHolder(EventViewHolder eventViewHolder, int i) {
-        eventViewHolder.playerName.setText(CurrentGameData.playersNames.get(i+5));
-        String playerRank = CurrentGameData.playerTier.get(i+5)
-                + " "
-                + CurrentGameData.playerDivision.get(i+5);
+        eventViewHolder.playerName.setText(players.get(i).getName());
+        String playerRank = players.get(i).getPlayerTier() + " " + players.get(i).getPlayerDivision();
         eventViewHolder.playerRank.setText(playerRank);
-        eventViewHolder.loadImage(i+5);
+        Picasso.with(context).load(players.get(i).getChampionImageUrl()).into(eventViewHolder.championImage);
+        Picasso.with(context).load(players.get(i).getSummonerSpell1Url()).into(eventViewHolder.summonerSpell1);
+        Picasso.with(context).load(players.get(i).getSummonerSpell2Url()).into(eventViewHolder.summonerSpell2);
+        String rank = players.get(i).getPlayerTier();
+
+        if (rank.equals("BRONZE"))
+            Picasso.with(context).load(R.drawable.bronze).into(eventViewHolder.rankEmblem);
+        else if (rank.equals("SILVER"))
+            Picasso.with(context).load(R.drawable.silver).into(eventViewHolder.rankEmblem);
+        else if (rank.equals("GOLD"))
+            Picasso.with(context).load(R.drawable.gold).into(eventViewHolder.rankEmblem);
+        else if (rank.equals("PLATINUM"))
+            Picasso.with(context).load(R.drawable.plat).into(eventViewHolder.rankEmblem);
+        else if (rank.equals("DIAMOND"))
+            Picasso.with(context).load(R.drawable.diamond).into(eventViewHolder.rankEmblem);
+        else if (rank.equals("MASTER"))
+            Picasso.with(context).load(R.drawable.master).into(eventViewHolder.rankEmblem);
+        else if (rank.equals("CHALLENGER"))
+            Picasso.with(context).load(R.drawable.challenger).into(eventViewHolder.rankEmblem);
+        else
+            Picasso.with(context).load(R.drawable.unranked).into(eventViewHolder.rankEmblem);
     }
 
     @Override
     public int getItemCount() {
-        return CurrentGameData.playersNames.size()/2;
+        return players.size();
     }
 }

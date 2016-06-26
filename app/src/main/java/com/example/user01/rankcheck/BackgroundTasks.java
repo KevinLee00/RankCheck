@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,10 +13,11 @@ import java.io.IOException;
 
 public class BackgroundTasks extends AsyncTask<Void, Void, Void> {
     Activity currentActivity;
-
+    boolean allBackgroundTasksComplete = true;
     BackgroundTasks(Activity activity) { this.currentActivity = activity; }
     @Override
     protected Void doInBackground(Void... params) {
+
         try {
             CurrentGameData.clearAllData();
 
@@ -35,8 +37,6 @@ public class BackgroundTasks extends AsyncTask<Void, Void, Void> {
                             + "?api_key="
                             + API_KEY.key);
             JSONArray participantsArray = myJsonObject.getJSONArray("participants");
-
-            Log.i("Info: ", "Begin Loop");
             String playerId;
             String tier;
             String division;
@@ -54,7 +54,6 @@ public class BackgroundTasks extends AsyncTask<Void, Void, Void> {
             String playerIdList = CurrentGameData.playerIds.toString();
             playerIdList = playerIdList.substring(1, playerIdList.length() - 1);
             playerIdList = playerIdList.replaceAll(" ", "" );
-            Log.i("PlayerIdList:" , "Created" );
             myJsonObject = JSON.readJsonFromUrl(
                     "https://na.api.pvp.net/api/lol/na/v2.5/league/by-summoner/"
                             + playerIdList
@@ -130,19 +129,19 @@ public class BackgroundTasks extends AsyncTask<Void, Void, Void> {
 
                     CurrentGameData.playerTier.add(tier);
                     CurrentGameData.playerDivision.add(division);
-                    Log.i("InfO:", "Rank Added");
                 }
                 else {
                     CurrentGameData.playerTier.add("UNRANKED");
                     CurrentGameData.playerDivision.add(" ");
-                    Log.i("Info", "Unranked Added");
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
+            allBackgroundTasksComplete = false;
             Log.i("Error:", "IOException Thrown");
         } catch (JSONException e) {
             e.printStackTrace();
+            allBackgroundTasksComplete = false;
             Log.i("Error:", "JSONException Thrown");
         }
         return null;
@@ -153,7 +152,14 @@ public class BackgroundTasks extends AsyncTask<Void, Void, Void> {
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
 
-        Intent intent = new Intent(currentActivity, RVActivity.class);
-        currentActivity.startActivity(intent);
+        if (allBackgroundTasksComplete) {
+            Log.i("Info", "CHANGING TO RVActivity");
+            Intent intent = new Intent(currentActivity, RVActivity.class);
+            currentActivity.startActivity(intent);
+        }
+        else
+            Toast.makeText(currentActivity.getApplicationContext(),
+                    "User doesn't exist or is not currently in a game",
+                    Toast.LENGTH_SHORT).show();
     }
 }
