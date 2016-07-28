@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="400dp"
+    android:id="@+id/player_card"
+    card_view:cardUseCompatPadding="true"
+    card_view:cardElevation="1dp"
+    card_view:cardBackgroundColor="@color/colorPrimary">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text="RUNES"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            >
+        </TextView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="3"
+            android:rowCount="3"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/rune_image1"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/unranked"
+                />
+
+            <TextView
+                android:id="@+id/rune_name1"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_toRightOf="@+id/rune_image1"
+                android:layout_toEndOf="@+id/rune_image1"/>
+
+            <ImageView
+                android:id="@+id/rune_image2"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/rune_image1"
+                android:src="@drawable/bronze"
+                />
+
+            <TextView
+                android:id="@+id/rune_name2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/rune_image2"
+                android:layout_toEndOf="@+id/rune_image2"
+                />
+
+            <ImageView
+                android:id="@+id/rune_image3"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/rune_image2"
+                android:src="@drawable/silver"
+                />
+
+            <TextView
+                android:id="@+id/rune_name3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/rune_image3"
+                android:layout_toEndOf="@id/rune_image3"/>
+
+            <ImageView
+                android:id="@+id/rune_image4"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/rune_image3"
+                android:src="@drawable/gold"/>
+
+            <TextView
+                android:id="@+id/rune_name4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/rune_image4"
+                android:layout_toEndOf="@id/rune_image4"/>
+
+            <ImageView
+                android:id="@+id/rune_image5"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/rune_image4"
+                android:src="@drawable/plat"/>
+
+            <TextView
+                android:id="@+id/rune_name5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/rune_image5"
+                android:layout_toEndOf="@id/rune_image5"/>
+
+            <ImageView
+                android:id="@+id/rune_image6"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/rune_image5"
+                android:src="@drawable/diamond"/>
+
+            <TextView
+                android:id="@+id/rune_name6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/rune_image6"
+                android:layout_toEndOf="@id/rune_image6"/>
+
+            <ImageView
+                android:id="@+id/rune_image7"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/rune_image6"
+                android:src="@drawable/master"/>
+
+            <TextView
+                android:id="@+id/rune_name7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/rune_image7"
+                android:layout_toEndOf="@id/rune_image7"/>
+
+            <ImageView
+                android:id="@+id/rune_image8"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/rune_image7"
+                android:src="@drawable/challenger"/>
+
+            <TextView
+                android:id="@+id/rune_name8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/rune_image8"
+                android:layout_toEndOf="@id/rune_image8"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</android.support.v7.widget.CardView>

@@ -11,39 +11,39 @@
 
     <ImageView
         android:id="@+id/champion_image"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         />
     <ImageView
         android:id="@+id/ss1"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginLeft="100dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginLeft="80dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         />
 
     <ImageView
         android:id="@+id/ss2"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="55dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="45dp"
         android:layout_marginBottom="10dp"
         />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="150dp"
-        android:layout_marginStart="150dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginLeft="125dp"
+        android:layout_marginStart="125dp"
+        android:layout_marginRight="70dp"
+        android:layout_marginEnd="70dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="10dp"
         android:orientation="vertical"
         >
 
@@ -61,17 +61,19 @@
             android:layout_height="wrap_content"
             android:textSize="15sp"
             android:textColor="@color/white"
+            android:textStyle="italic"
             />
 
 
     </LinearLayout>
-    <ImageView
+    <ImageButton
         android:id="@+id/rank_emblem"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="right"
-        android:layout_marginTop="25dp"
-        android:layout_marginBottom="25dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="15dp"
         />
 
 </android.support.v7.widget.CardView>

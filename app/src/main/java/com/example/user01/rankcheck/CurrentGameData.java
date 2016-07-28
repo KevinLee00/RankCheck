@@ -18,7 +18,8 @@ public class CurrentGameData {
     public static ArrayList<String> playerDivision = new ArrayList<>();
     public static ArrayList<String> playerTier = new ArrayList<>();
 
-    public static int numOfPlayers = playersNames.size();
+    public static ArrayList<ArrayList<Rune>> runes = new ArrayList<>();
+    public static ArrayList<ArrayList<Mastery>> masteries = new ArrayList<>();
 
 
     public static void clearAllData() {
@@ -32,6 +33,7 @@ public class CurrentGameData {
         summonerSpell2Urls.clear();
         playerDivision.clear();
         playerTier.clear();
-        numOfPlayers = 0;
+        runes.clear();
+        masteries.clear();
     }
 }

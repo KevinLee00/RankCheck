@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void testToast(View view) {
-        TextView tv = (TextView) findViewById(R.id.textView);
+//        TextView tv = (TextView) findViewById(R.id.textView);
         EditText et = (EditText) findViewById(R.id.summoner_name);
         String name = et.getText().toString().replaceAll("\\s+","");
         UserData.setSummonerName(name);

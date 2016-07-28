@@ -1,33 +1,33 @@
 package com.example.user01.rankcheck;
 
-/**
- * Created by user01 on 6/25/2016.
- */
-public class Player {
+import com.bignerdranch.expandablerecyclerview.Model.ParentObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Player implements ParentObject {
     private String name;
     private String id;
-    private String championId;
     private String championImageUrl;
-    private String summonerSpell1;
     private String summonerSpell1Url;
-    private String summonerSpell2;
     private String summonerSpell2Url;
     private String playerDivision;
     private String playerTier;
+    private ArrayList<Rune> runes;
+    private ArrayList<Mastery> masteries;
 
     Player() {
-        this.name = "";
-        this.id = "";
-        this.championId = "";
-        this.championImageUrl = "";
-        this.summonerSpell1 = "";
+        this.name = null;
+        this.id = null;
+        this.championImageUrl = null;
         this.summonerSpell1Url = null;
-        this.summonerSpell2 = null;
         this.summonerSpell2Url = null;
         this.playerDivision = null;
         this.playerTier = null;
-
+        this.runes = null;
+        this.masteries = null;
     }
+
     public String getPlayerTier() {
         return playerTier;
     }
@@ -52,28 +52,12 @@ public class Player {
         this.id = id;
     }
 
-    public String getChampionId() {
-        return championId;
-    }
-
-    public void setChampionId(String championId) {
-        this.championId = championId;
-    }
-
     public String getChampionImageUrl() {
         return championImageUrl;
     }
 
     public void setChampionImageUrl(String championImageUrl) {
         this.championImageUrl = championImageUrl;
-    }
-
-    public String getSummonerSpell1() {
-        return summonerSpell1;
-    }
-
-    public void setSummonerSpell1(String summonerSpell1) {
-        this.summonerSpell1 = summonerSpell1;
     }
 
     public String getSummonerSpell1Url() {
@@ -84,13 +68,6 @@ public class Player {
         this.summonerSpell1Url = summonerSpell1Url;
     }
 
-    public String getSummonerSpell2() {
-        return summonerSpell2;
-    }
-
-    public void setSummonerSpell2(String summonerSpell2) {
-        this.summonerSpell2 = summonerSpell2;
-    }
 
     public String getSummonerSpell2Url() {
         return summonerSpell2Url;
@@ -106,5 +83,31 @@ public class Player {
 
     public void setPlayerDivision(String playerDivision) {
         this.playerDivision = playerDivision;
+    }
+
+    public ArrayList<Rune> getRunes() {
+        return runes;
+    }
+
+    public void setRunes(ArrayList<Rune> runes) {
+        this.runes = runes;
+    }
+
+    public ArrayList<Mastery> getMasteries() {
+        return masteries;
+    }
+
+    public void setMasteries(ArrayList<Mastery> masteries) {
+        this.masteries = masteries;
+    }
+
+    @Override
+    public List<Object> getChildObjectList() {
+        return null;
+    }
+
+    @Override
+    public void setChildObjectList(List<Object> list) {
+
     }
 }

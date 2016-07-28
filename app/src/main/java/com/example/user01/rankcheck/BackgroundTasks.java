@@ -9,6 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 public class BackgroundTasks extends AsyncTask<Void, Void, Void> {
@@ -49,6 +50,26 @@ public class BackgroundTasks extends AsyncTask<Void, Void, Void> {
                 CurrentGameData.championIds.add(myJsonObject.getString("championId" ));
                 CurrentGameData.summonerSpell1.add(myJsonObject.getString("spell1Id" ));
                 CurrentGameData.summonerSpell2.add(myJsonObject.getString("spell2Id" ));
+
+                JSONArray runesArray = myJsonObject.getJSONArray("runes");
+                ArrayList<Rune> runesList = new ArrayList<>();
+                for (int j=0; j<runesArray.length();j++) {
+                    String runeId = runesArray.getJSONObject(j).getString("runeId");
+                    String count = runesArray.getJSONObject(j).getString("count");
+                    Rune rune = new Rune(runeId, count);
+                    runesList.add(rune);
+                }
+                CurrentGameData.runes.add(runesList);
+
+                JSONArray masteriesArray = myJsonObject.getJSONArray("masteries");
+                ArrayList<Mastery> masteryList = new ArrayList<>();
+                for (int j=0; j<masteriesArray.length(); j++) {
+                    String masteryId = masteriesArray.getJSONObject(j).getString("masteryId");
+                    String rank = masteriesArray.getJSONObject(j).getString("rank");
+                    Mastery mastery = new Mastery(rank, masteryId);
+                    masteryList.add(mastery);
+                }
+                CurrentGameData.masteries.add(masteryList);
             }
 
             String playerIdList = CurrentGameData.playerIds.toString();
@@ -59,6 +80,27 @@ public class BackgroundTasks extends AsyncTask<Void, Void, Void> {
                             + playerIdList
                             + "/entry?api_key="
                             + API_KEY.key);
+
+            // Get player ranks
+            for (int i=0; i<10; i++) {
+                playerId = CurrentGameData.playerIds.get(i);
+                if (myJsonObject.has(playerId)) {
+                    JSONArray player = myJsonObject.getJSONArray(playerId);
+                    JSONObject tempJsonObject = player.getJSONObject(0);
+                    tier = tempJsonObject.getString("tier");
+
+                    JSONArray entries = tempJsonObject.getJSONArray("entries");
+                    tempJsonObject = entries.getJSONObject(0);
+                    division = tempJsonObject.getString("division");
+
+                    CurrentGameData.playerTier.add(tier);
+                    CurrentGameData.playerDivision.add(division);
+                }
+                else {
+                    CurrentGameData.playerTier.add("UNRANKED");
+                    CurrentGameData.playerDivision.add(" ");
+                }
+            }
 
             // Begin to build Image URLs
             for (int i=0; i<10; i++) {
@@ -78,7 +120,7 @@ public class BackgroundTasks extends AsyncTask<Void, Void, Void> {
                 // Get summoner spell 1 key
                 JSONObject summonerSpell1Info = JSON.readJsonFromUrl(
                         "https://global.api.pvp.net/api/lol/static-data/na/v1.2/summoner-spell/"
-                        + CurrentGameData.summonerSpell1.get(i)
+                                + CurrentGameData.summonerSpell1.get(i)
                                 + "?api_key="
                                 + API_KEY.key);
                 String summonerSpell1Key = summonerSpell1Info.getString("key");
@@ -115,26 +157,6 @@ public class BackgroundTasks extends AsyncTask<Void, Void, Void> {
                 CurrentGameData.summonerSpell2Urls.add(summonerSpell2Url);
             }
 
-            // Get player ranks
-            for (int i=0; i<10; i++) {
-                playerId = CurrentGameData.playerIds.get(i);
-                if (myJsonObject.has(playerId)) {
-                    JSONArray player = myJsonObject.getJSONArray(playerId);
-                    JSONObject tempJsonObject = player.getJSONObject(0);
-                    tier = tempJsonObject.getString("tier");
-
-                    JSONArray entries = tempJsonObject.getJSONArray("entries");
-                    tempJsonObject = entries.getJSONObject(0);
-                    division = tempJsonObject.getString("division");
-
-                    CurrentGameData.playerTier.add(tier);
-                    CurrentGameData.playerDivision.add(division);
-                }
-                else {
-                    CurrentGameData.playerTier.add("UNRANKED");
-                    CurrentGameData.playerDivision.add(" ");
-                }
-            }
         } catch (IOException e) {
             e.printStackTrace();
             allBackgroundTasksComplete = false;
@@ -159,7 +181,8 @@ public class BackgroundTasks extends AsyncTask<Void, Void, Void> {
         }
         else
             Toast.makeText(currentActivity.getApplicationContext(),
-                    "User doesn't exist or is not currently in a game",
+                    "This summoner is not currently in a game.",
                     Toast.LENGTH_SHORT).show();
     }
 }
+// [kevin suks]; }{ pretty butterfly lel :^) }

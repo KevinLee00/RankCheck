@@ -22,7 +22,8 @@
                 android:textColor="@color/blue"
                 android:textSize="40sp"
                 android:text="BLUE SIDE"
-                android:paddingTop="10dp"/>
+                android:paddingTop="10dp"
+                android:textStyle="bold"/>
 
             <!-- A RecyclerView with some commonly used attributes -->
             <android.support.v7.widget.RecyclerView
@@ -41,16 +42,17 @@
                 android:textColor="@color/red"
                 android:textSize="40sp"
                 android:text="RED SIDE"
+                android:textStyle="bold"
                 />
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/redside_rv"
-                android:scrollbars="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="3dp"
-                android:paddingRight="3dp">
-            </android.support.v7.widget.RecyclerView>
+            <!--<android.support.v7.widget.RecyclerView-->
+                <!--android:id="@+id/redside_rv"-->
+                <!--android:scrollbars="vertical"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:paddingLeft="3dp"-->
+                <!--android:paddingRight="3dp">-->
+            <!--</android.support.v7.widget.RecyclerView>-->
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
